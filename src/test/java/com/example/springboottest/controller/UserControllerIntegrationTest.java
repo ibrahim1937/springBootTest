@@ -3,6 +3,8 @@ package com.example.springboottest.controller;
 import com.example.springboottest.entity.Role;
 import com.example.springboottest.entity.User;
 import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,13 +16,14 @@ import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class UserControllerIntegrationTest {
 
     @Autowired
     UserController userController;
 
     @Test
-    public void createUserTest() {
+    public void createUserTestA() {
 
         User user = new User();
         user.setNom("Chahboune");
@@ -37,9 +40,10 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    public void createUserEmailMissingTest(){
+    public void createUserTestB(){
 
         User user = new User();
+        user.setEmail("email@email.com");
 
         // POST our user to the controller
         String outcome = userController.createUser(user);
