@@ -36,5 +36,17 @@ public class UserControllerIntegrationTest {
         assertThat(outcome, is(equalTo("success")));
     }
 
+    @Test
+    public void createUserEmailMissingTest(){
+
+        User user = new User();
+
+        // POST our user to the controller
+        String outcome = userController.createUser(user);
+
+        // Verify the addition
+        assertThat(outcome, is(equalTo("failure")));
+
+    }
 
 }
