@@ -16,12 +16,15 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public String createUser(@RequestBody User user) {
-        User user1 = userService.createUser(user);
-        if (user1 != null) {
+    public String createUser(@RequestBody User user) throws RuntimeException {
+
+        try {
+            userService.createUser(user);
             return "success";
+        } catch (RuntimeException e) {
+            return "failure";
         }
-        return "failure";
+
     }
 
 }

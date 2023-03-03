@@ -26,7 +26,11 @@ public class UserService {
 	 * @return created user
 	 */
 	public User createUser(User user) {
-		return userRepository.save(user);
+		try {
+			return userRepository.save(user);
+		} catch (DataIntegrityViolationException e) {
+			throw new RuntimeException("User already exists");
+		}
 	}
 
 }
