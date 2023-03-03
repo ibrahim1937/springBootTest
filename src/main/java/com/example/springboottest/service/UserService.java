@@ -2,6 +2,7 @@ package com.example.springboottest.service;
 
 import com.example.springboottest.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import com.example.springboottest.repository.UserRepository;
 
@@ -24,7 +25,12 @@ public class UserService {
 	 * @return created user
 	 */
 	public User createUser(User user) {
-		return userRepository.save(user);
+		try {
+			return userRepository.save(user);
+		} catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
